@@ -13,34 +13,6 @@ Every `git push` to GitHub automatically triggers Jenkins, which checks out the 
 
 ---
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Technology Stack](#technology-stack)
-- [Architecture](#architecture)
-- [Repository Structure](#repository-structure)
-- [Prerequisites](#prerequisites)
-- [Setup Guide](#setup-guide)
-  - [1. Launch the EC2 Instance](#1-launch-the-ec2-instance)
-  - [2. Connect via SSH](#2-connect-via-ssh)
-  - [3. Install Java](#3-install-java)
-  - [4. Install Jenkins](#4-install-jenkins)
-  - [5. Access the Jenkins Web Interface](#5-access-the-jenkins-web-interface)
-  - [6. Connect the Project to GitHub](#6-connect-the-project-to-github)
-- [Application and Tests](#application-and-tests)
-- [Maven Configuration](#maven-configuration)
-- [Local Build and Test](#local-build-and-test)
-- [Jenkinsfile](#jenkinsfile)
-- [Jenkins Pipeline Job](#jenkins-pipeline-job)
-- [GitHub Webhook (Automatic Trigger)](#github-webhook-automatic-trigger)
-- [Failure Scenario Demo](#failure-scenario-demo)
-- [Screenshots](#screenshots)
-- [Results](#results)
-- [Future Improvements](#future-improvements)
-- [Author](#author)
-
----
-
 ## Overview
 
 | Item | Details |
@@ -126,14 +98,6 @@ jenkins-ci-cd-demo/
 
 ---
 
-## Prerequisites
-
-- An AWS account with permission to launch EC2 instances
-- An SSH key pair (`.pem` file) for the instance
-- A GitHub account and repository
-- Basic familiarity with Linux, Git and Maven
-
----
 
 ## Setup Guide
 
@@ -400,83 +364,6 @@ The pipeline stops at the **Test** stage, so the **Package** and deployment stag
 ```java
 assertEquals(5, app.add(2, 3));
 ```
-
----
-
-## Screenshots
-
-> Add your screenshots to a `docs/images/` folder and update the file names below if needed.
-
-### Infrastructure
-
-| | |
-|---|---|
-| ![AWS EC2 Jenkins Server](docs/images/02-ec2-instance.png) | ![SSH Connection](docs/images/03-ssh-connection.png) |
-| *Figure 1: AWS EC2 instance used as the Jenkins server* | *Figure 2: Successful SSH connection to the Ubuntu EC2 instance* |
-| ![Java Installation](docs/images/04-java-version.png) | ![Jenkins Service](docs/images/05-jenkins-service.png) |
-| *Figure 3: Java installation and version verification* | *Figure 4: Jenkins service running successfully on Ubuntu* |
-
-![Jenkins Dashboard](docs/images/06-jenkins-dashboard.png)
-*Figure 5: Jenkins dashboard running on AWS EC2*
-
-### Source Code and Configuration
-
-| | |
-|---|---|
-| ![GitHub Repository](docs/images/07-github-repo.png) | ![Git Remote](docs/images/08-git-remote.png) |
-| *Figure 6: GitHub repository containing the Java Maven project* | *Figure 7: Git repository configured with the GitHub remote* |
-| ![pom.xml](docs/images/09-pom-xml.png) | ![App.java](docs/images/10-app-java.png) |
-| *Figure 8: Maven project configuration and JUnit dependency* | *Figure 9: Java application source code* |
-
-![JUnit Test Case](docs/images/11-junit-test.png)
-*Figure 10: JUnit automated test case*
-
-### Build, Test and Pipeline
-
-![Maven Test Success](docs/images/12-maven-test-success.png)
-*Figure 11: Successful execution of JUnit tests using Maven*
-
-![Jenkinsfile](docs/images/13-jenkinsfile.png)
-*Figure 12: Jenkins declarative pipeline configuration*
-
-![Pipeline SCM Configuration](docs/images/14-pipeline-scm-config.png)
-*Figure 13: Jenkins configured to retrieve the pipeline definition from GitHub*
-
-![Successful Build](docs/images/15-jenkins-build-success.png)
-*Figure 14: Successful Jenkins pipeline execution*
-
-![Console Output](docs/images/16-console-output.png)
-*Figure 15: Jenkins console output showing successful JUnit execution*
-
-![JUnit Results in Jenkins](docs/images/17-junit-results.png)
-*Figure 16: JUnit test results published in Jenkins*
-
-### Automation and Failure Handling
-
-![GitHub Webhook](docs/images/18-github-webhook.png)
-*Figure 17: GitHub webhook configured to trigger Jenkins on code push*
-
-![Automatic Trigger](docs/images/19-auto-trigger.png)
-*Figure 18: Jenkins pipeline automatically triggered by a GitHub push*
-
-![Failed Test](docs/images/20-failed-test.png)
-*Figure 19: Jenkins pipeline detecting a failed automated test*
-
----
-
-## Results
-
-The implemented CI pipeline provides:
-
-| Capability | Implementation |
-|------------|----------------|
-| **Source management** | GitHub stores the source code |
-| **Automated trigger** | GitHub webhook triggers Jenkins on every push |
-| **Build** | Maven compiles the Java application |
-| **Testing** | JUnit executes automated tests |
-| **Test reporting** | Jenkins records and displays JUnit results |
-| **Quality gate** | Failed tests stop the pipeline |
-| **Packaging** | Maven packages the application |
 
 ---
 
